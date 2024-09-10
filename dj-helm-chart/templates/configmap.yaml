@@ -1,8 +1,8 @@
 kind: ConfigMap 
 apiVersion: v1 
 metadata:
-  name: myconfigmapv1.0
-  namespace: default
+  name: {{ .Values.configmap.name }}
+  namespace: {{ .Values.namespace }}
 data:
-  BG_COLOR: 'darkblue'
-  PAGE_TITLE: 'HELLO WORLD - DJ'
+  BG_COLOR: {{ .Values.configmap.data.BG_COLOR }}
+  PAGE_TITLE: {{ .Values.configmap.data.PAGE_TITLE }}

@@ -1,25 +1,25 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: djwebapp
-  namespace: default
+  name: {{ .Values.appName }}
+  namespace: {{ .Values.namespace }}
   labels:
-    app: djwebapp
+    app: {{ .Values.appName }}
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: djwebapp
+      app: {{ .Values.appName }}
   template:
     metadata:
       labels:
-        app: djwebapp
+        app: {{ .Values.appName }}
     spec:
       containers:
-      - name: djwebapp
-        image: hoquenazmul/hello_dj:latest
+      - name: {{ .Values.appName }}
+        image: '{{ .Values.image.name }}:{{ .Values.image.tag }}'
         ports:
-        - containerPort: 8000
+        - containerPort: {{ .Values.appPort }}
         envFrom:
         - configMapRef:
-            name: myconfigmapv1.0
+            name: {{ .Values.configmap.name }}
